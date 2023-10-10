@@ -77,7 +77,7 @@ var preloadimages = [];
 // This section ensure that we don't lose data. Anytime the 
 // client is disconnected, an alert appears onscreen
 var connectedRef = firebase.database().ref(".info/connected");
-var connection = firebase.database().ref("VAAST_AAT3_sensory/" + id + "/")
+var connection = firebase.database().ref("Pilot_AA_contingencies/" + id + "/")
 var dialog = undefined;
 var first_connection = true;
 
@@ -327,7 +327,7 @@ var next_position_training = function () {
 // init ---------------------------------------------------------------------------------
 var saving_id = function () {
   database
-    .ref("participant_id_AAT3_Ghent/")
+    .ref("participant_id_Pilot_AA_contingencies/")
     .push()
     .set({
       id: id,
@@ -341,7 +341,7 @@ var saving_id = function () {
 // vaast trial --------------------------------------------------------------------------
 var saving_vaast_trial = function () {
   database
-    .ref("vaast_trial_AAT3_Ghent/").
+    .ref("vaast_trial_Pilot_AA_contingencies/").
     push()
     .set({
       id: id,
@@ -358,7 +358,7 @@ var saving_vaast_trial = function () {
 
 var saving_browser_events = function (completion) {
   database
-    .ref("browser_event_AAT3_Ghent/")
+    .ref("browser_event_Pilot_AA_contingencies/")
     .push()
     .set({
       id: id,
