@@ -222,6 +222,8 @@ var movement_blue    = undefined;
 var movement_yellow    = undefined;
 var group_to_approach = undefined;
 var group_to_avoid    = undefined;
+var prime_blue = undefined;
+var prime_yellow    = undefined;
 
 switch (training_cond) {
   case "cont_placebo_G1Y":
