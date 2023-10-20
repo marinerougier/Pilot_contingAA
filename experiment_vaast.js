@@ -972,6 +972,7 @@ var vaast_training_block_G1B = {
 // Final questions -----------------------------------------------------------------------
 
 // memory & believability of contingencies
+/*
     var believeConting = {
         timeline: [{
             type: 'survey-text',
@@ -995,7 +996,43 @@ var vaast_training_block_G1B = {
             });
         },
     };
+*/
 
+    var believeConting = {
+        timeline: [{
+            type: 'survey-text',
+            preamble: "During this task, you approached faces belonging to one group and avoided faces belonging to the other group. <b><u>Based on what you experienced during the Video Game task</u></b>, you believe that <b><u>the faces you approached were...</u></b> (please answer this question by providing percentages (the <u>sum must be 100</u>))",
+            questions: [{ prompt: "% the yellow ones", rows: 1, columns: 10 },
+            { prompt: "% the blue ones", rows: 1, columns: 10 }],
+            button_label: "continue",
+        }],
+        loop_function: function (data) {
+            var res0 = data.values()[0].responses;
+            var res0 = JSON.parse(res0).Q0;
+            var res1 = data.values()[0].responses;
+            var res1 = JSON.parse(res1).Q1;
+            var number0 = parseInt(res0)
+            var number1 = parseInt(res1)
+            if (res0 == "") {
+                alert("Please answer the question");
+                return true;
+            }
+            if (res1 == "") {
+                alert("Please answer the question");
+                return true;
+            }
+            if (number0 + number1 != 100) {
+               alert("The sum must be 100!");
+                return true;
+            }
+        },
+        on_finish: function (data) {
+            jsPsych.data.addProperties({
+                believeAppyellow: JSON.parse(data.responses).Q0,
+                believeAppblue: JSON.parse(data.responses).Q1,
+            });
+        },
+    };
 
 //Gender
    var genderOptions = ['Male&nbsp', 'Female&nbsp', 'Other&nbsp'];
@@ -1125,7 +1162,7 @@ var fullscreen_trial_exit = {
 
 var timeline = [];
 
-// fullscreen
+//fullscreen
 timeline.push(
   consent,
   fullscreen_trial,
