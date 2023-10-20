@@ -122,7 +122,8 @@ var browser_events_n = 1;
 
 // Instruction vs. instruction+sensory conditions
 var training_cond = jsPsych.data.getURLVariable("training_cond");
-if(training_cond == null) {training_cond = jsPsych.randomization.sampleWithoutReplacement(["cont_instr_vis_G1Y", "cont_instr_vis_G1B"], 1)[0];}
+//if(training_cond == null) {training_cond = jsPsych.randomization.sampleWithoutReplacement(["cont_placebo_G1Y"], 1)[0];}
+if(training_cond == null) {training_cond = jsPsych.randomization.sampleWithoutReplacement(["cont_placebo_G1Y", "cont_placebo_G1B", "cont_genuine_G1Y", "cont_genuine_G1B"], 1)[0];}
 
 // for the AAT, randomization of which group is approached and which is avoided
 var approached_grp = jsPsych.randomization.sampleWithoutReplacement(["approach_blue", "approach_yellow"], 1)[0];
@@ -147,37 +148,68 @@ var showing_cursor = {
 
 // Preload faces
 var faces = [
-      "stimuli/Face19_B.png",
-      "stimuli/Face28_B.png",
-      "stimuli/Face55_B.png",
-      "stimuli/Face95_B.png",
-      "stimuli/Face104_B.png",
-      "stimuli/Face115_B.png",
-      "stimuli/Face119_B.png",
-      "stimuli/Face142_B.png",
-      "stimuli/Face10_J.png",
-      "stimuli/Face16_J.png",
-      "stimuli/Face17_J.png",
-      "stimuli/Face45_J.png",
-      "stimuli/Face85_J.png",
-      "stimuli/Face103_J.png",
-      "stimuli/Face116_J.png",
-      "stimuli/Face132_J.png",
-      "stimuli/Face19_J.png",
-      "stimuli/Face28_J.png",
-      "stimuli/Face55_J.png",
-      "stimuli/Face95_J.png",
-      "stimuli/Face104_J.png",
-      "stimuli/Face115_J.png",
-      "stimuli/Face119_J.png",
-      "stimuli/Face142_J.png",
-      "stimuli/Face10_B.png",
-      "stimuli/Face16_B.png",
-      "stimuli/Face17_B.png",
-      "stimuli/Face45_B.png",
-      "stimuli/Face85_B.png",
-      "stimuli/Face103_B.png",
-      "stimuli/Face116_B.png",
+      "stimuli_instructions/Face19_B.png",
+      "stimuli_instructions/Face28_B.png",
+      "stimuli_instructions/Face55_B.png",
+      "stimuli_instructions/Face95_B.png",
+      "stimuli_instructions/Face104_B.png",
+      "stimuli_instructions/Face115_B.png",
+      "stimuli_instructions/Face119_B.png",
+      "stimuli_instructions/Face142_B.png",
+      "stimuli_instructions/Face10_J.png",
+      "stimuli_instructions/Face16_J.png",
+      "stimuli_instructions/Face17_J.png",
+      "stimuli_instructions/Face45_J.png",
+      "stimuli_instructions/Face85_J.png",
+      "stimuli_instructions/Face103_J.png",
+      "stimuli_instructions/Face116_J.png",
+      "stimuli_instructions/Face132_J.png",
+      "stimuli_instructions/Face19_J.png",
+      "stimuli_instructions/Face28_J.png",
+      "stimuli_instructions/Face55_J.png",
+      "stimuli_instructions/Face95_J.png",
+      "stimuli_instructions/Face104_J.png",
+      "stimuli_instructions/Face115_J.png",
+      "stimuli_instructions/Face119_J.png",
+      "stimuli_instructions/Face142_J.png",
+      "stimuli_instructions/Face10_B.png",
+      "stimuli_instructions/Face16_B.png",
+      "stimuli_instructions/Face17_B.png",
+      "stimuli_instructions/Face45_B.png",
+      "stimuli_instructions/Face85_B.png",
+      "stimuli_instructions/Face103_B.png",
+      "stimuli_instructions/Face116_B.png",
+      "stimuli_AA/Face19_B.png",
+      "stimuli_AA/Face28_B.png",
+      "stimuli_AA/Face55_B.png",
+      "stimuli_AA/Face95_B.png",
+      "stimuli_AA/Face104_B.png",
+      "stimuli_AA/Face115_B.png",
+      "stimuli_AA/Face119_B.png",
+      "stimuli_AA/Face142_B.png",
+      "stimuli_AA/Face10_J.png",
+      "stimuli_AA/Face16_J.png",
+      "stimuli_AA/Face17_J.png",
+      "stimuli_AA/Face45_J.png",
+      "stimuli_AA/Face85_J.png",
+      "stimuli_AA/Face103_J.png",
+      "stimuli_AA/Face116_J.png",
+      "stimuli_AA/Face132_J.png",
+      "stimuli_AA/Face19_J.png",
+      "stimuli_AA/Face28_J.png",
+      "stimuli_AA/Face55_J.png",
+      "stimuli_AA/Face95_J.png",
+      "stimuli_AA/Face104_J.png",
+      "stimuli_AA/Face115_J.png",
+      "stimuli_AA/Face119_J.png",
+      "stimuli_AA/Face142_J.png",
+      "stimuli_AA/Face10_B.png",
+      "stimuli_AA/Face16_B.png",
+      "stimuli_AA/Face17_B.png",
+      "stimuli_AA/Face45_B.png",
+      "stimuli_AA/Face85_B.png",
+      "stimuli_AA/Face103_B.png",
+      "stimuli_AA/Face116_B.png",
 ];
 
 
@@ -186,24 +218,76 @@ preloadimages.push(faces);
 // VAAST --------------------------------------------------------------------------------
 // VAAST variables ----------------------------------------------------------------------
 
+var movement_blue    = undefined;
+var movement_yellow    = undefined;
 var group_to_approach = undefined;
 var group_to_avoid    = undefined;
 
 switch (training_cond) {
-  case "cont_instr_vis_G1Y":
+  case "cont_placebo_G1Y":
     {if (approached_grp == "approach_blue"){
+    movement_blue    = "approach";
+    movement_yellow    = "avoidance";
+    prime_blue = "approach";
+    prime_yellow = "avoid";
     group_to_approach = "<span style='color:#2a57ea'><b>BLUE</b></span>";
     group_to_avoid    = "<span style='color:#b5a21b'><b>YELLOW</b></span>";
     } else if (approached_grp == "approach_yellow"){
+    movement_blue    = "avoidance";
+    movement_yellow    = "approach";
+    prime_blue = "avoid";
+    prime_yellow = "approach";
     group_to_approach = "<span style='color:#b5a21b'><b>YELLOW</b></span>";
     group_to_avoid    = "<span style='color:#2a57ea'><b>BLUE</b></span>";
     }};
     break;
-  case "cont_instr_vis_G1B":
+  case "cont_placebo_G1B":
     {if (approached_grp == "approach_blue"){
+    movement_blue    = "approach";
+    movement_yellow    = "avoidance";
+    prime_blue = "approach";
+    prime_yellow = "avoid";
     group_to_approach = "<span style='color:#2a57ea'><b>BLUE</b></span>";
     group_to_avoid    = "<span style='color:#b5a21b'><b>YELLOW</b></span>";
     } else if (approached_grp == "approach_yellow"){
+    movement_blue    = "avoidance";
+    movement_yellow    = "approach";
+    prime_blue = "avoid";
+    prime_yellow = "approach";
+    group_to_approach = "<span style='color:#b5a21b'><b>YELLOW</b></span>";
+    group_to_avoid    = "<span style='color:#2a57ea'><b>BLUE</b></span>";
+    }};
+    break;
+  case "cont_genuine_G1Y":
+    {if (approached_grp == "approach_blue"){
+    movement_blue    = "approach";
+    movement_yellow    = "avoidance";
+    prime_blue = "approach";
+    prime_yellow = "avoid";
+    group_to_approach = "<span style='color:#2a57ea'><b>BLUE</b></span>";
+    group_to_avoid    = "<span style='color:#b5a21b'><b>YELLOW</b></span>";
+    } else if (approached_grp == "approach_yellow"){
+    movement_blue    = "avoidance";
+    movement_yellow    = "approach";
+    prime_blue = "avoid";
+    prime_yellow = "approach";
+    group_to_approach = "<span style='color:#b5a21b'><b>YELLOW</b></span>";
+    group_to_avoid    = "<span style='color:#2a57ea'><b>BLUE</b></span>";
+    }};
+    break;
+  case "cont_genuine_G1B":
+    {if (approached_grp == "approach_blue"){
+    movement_blue    = "approach";
+    movement_yellow    = "avoidance";
+    prime_blue = "approach";
+    prime_yellow = "avoidance";
+    group_to_approach = "<span style='color:#2a57ea'><b>BLUE</b></span>";
+    group_to_avoid    = "<span style='color:#b5a21b'><b>YELLOW</b></span>";
+    } else if (approached_grp == "approach_yellow"){
+    movement_blue    = "avoidance";
+    movement_yellow    = "approach";
+    prime_blue = "avoid";
+    prime_yellow = "approach";
     group_to_approach = "<span style='color:#b5a21b'><b>YELLOW</b></span>";
     group_to_avoid    = "<span style='color:#2a57ea'><b>BLUE</b></span>";
     }};
@@ -213,7 +297,7 @@ switch (training_cond) {
 // VAAST stimuli ------------------------------------------------------------------------
 // vaast image stimuli ------------------------------------------------------------------
 
-// random selection so that in the approach and avoidance groups there are  50/50 of group 1 and group 2 faces
+// PLACEBO CONDITION: random selection so that in the approach and avoidance groups there are  50/50 of group 1 and group 2 faces
 
   var group1 = [
   "stimuli_AA/Face19.png", 
@@ -271,6 +355,44 @@ switch (training_cond) {
   {movement: "avoidance",  prime: "avoid",  stimulus: av_list[7]},
   ]
 
+// GENUINE CONDITION
+var vaast_stim_training_G1Y = [
+  {movement: movement_blue, prime: prime_blue, group: "blue", stimulus: 'stimuli_AA/Face19_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue", stimulus: 'stimuli_AA/Face28_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue", stimulus: 'stimuli_AA/Face55_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue", stimulus: 'stimuli_AA/Face95_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue", stimulus: 'stimuli_AA/Face104_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue", stimulus: 'stimuli_AA/Face115_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue", stimulus: 'stimuli_AA/Face119_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue", stimulus: 'stimuli_AA/Face142_B.png'},
+  {movement: movement_yellow, prime: prime_yellow,  group: "yellow",  stimulus: 'stimuli_AA/Face10_J.png'},
+  {movement: movement_yellow, prime: prime_yellow,  group: "yellow",  stimulus: 'stimuli_AA/Face16_J.png'},
+  {movement: movement_yellow, prime: prime_yellow,  group: "yellow",  stimulus: 'stimuli_AA/Face17_J.png'},
+  {movement: movement_yellow, prime: prime_yellow,  group: "yellow",  stimulus: 'stimuli_AA/Face45_J.png'},
+  {movement: movement_yellow, prime: prime_yellow,  group: "yellow",  stimulus: 'stimuli_AA/Face85_J.png'},
+  {movement: movement_yellow, prime: prime_yellow,  group: "yellow",  stimulus: 'stimuli_AA/Face103_J.png'},
+  {movement: movement_yellow, prime: prime_yellow,  group: "yellow",  stimulus: 'stimuli_AA/Face116_J.png'},
+  {movement: movement_yellow, prime: prime_yellow,  group: "yellow",  stimulus: 'stimuli_AA/Face132_J.png'}
+]
+
+var vaast_stim_training_G1B = [
+  {movement: movement_yellow, prime: prime_yellow, group: "yellow", stimulus: 'stimuli_AA/Face19_J.png'},
+  {movement: movement_yellow, prime: prime_yellow, group: "yellow", stimulus: 'stimuli_AA/Face28_J.png'},
+  {movement: movement_yellow, prime: prime_yellow, group: "yellow", stimulus: 'stimuli_AA/Face55_J.png'},
+  {movement: movement_yellow, prime: prime_yellow, group: "yellow", stimulus: 'stimuli_AA/Face95_J.png'},
+  {movement: movement_yellow, prime: prime_yellow, group: "yellow", stimulus: 'stimuli_AA/Face104_J.png'},
+  {movement: movement_yellow, prime: prime_yellow, group: "yellow", stimulus: 'stimuli_AA/Face115_J.png'},
+  {movement: movement_yellow, prime: prime_yellow, group: "yellow", stimulus: 'stimuli_AA/Face119_J.png'},
+  {movement: movement_yellow, prime: prime_yellow, group: "yellow", stimulus: 'stimuli_AA/Face142_J.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue",  stimulus: 'stimuli_AA/Face10_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue",  stimulus: 'stimuli_AA/Face16_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue",  stimulus: 'stimuli_AA/Face17_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue",  stimulus: 'stimuli_AA/Face45_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue",  stimulus: 'stimuli_AA/Face85_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue",  stimulus: 'stimuli_AA/Face103_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue",  stimulus: 'stimuli_AA/Face116_B.png'},
+  {movement: movement_blue, prime: prime_blue, group: "blue",  stimulus: 'stimuli_AA/Face132_B.png'}
+]
 
 // vaast background images --------------------------------------------------------------,
 
@@ -431,7 +553,7 @@ var Gene_Instr = {
     "<br>" +
     "<p class='instructions'><center> In this study, we are interested in the way people categorize " +
     "others as a function of their face. <br>You will " +
-    "perform several tasks and answer a few questions. </p></center>" +
+    "perform the 'Video Game' task and answer a few questions. </p></center>" +
     "<br>" +
     "<p class = 'continue-instructions'>Press <strong>space</strong> to" +
     " continue.</p>",
@@ -460,24 +582,24 @@ var vaast_instructions_2_G1Y = {
     "<h1 class ='custom-title'>Video Game task</h1>" +
     "<center><p class='instructions'>Two groups of faces will be displayed in this environment. <br></p>" +
     "<center><p class='instructions'> Faces of the <b><span style='color:#2a57ea'><b>BLUE</b></span> group:</b></p>" +
-    "<img src = 'stimuli/Face19_B.png'>" +
-    "<img src = 'stimuli/Face28_B.png'>" +
-    "<img src = 'stimuli/Face55_B.png'>" +
-    "<img src = 'stimuli/Face95_B.png'>" +
-    "<img src = 'stimuli/Face104_B.png'>" +
-    "<img src = 'stimuli/Face115_B.png'>" +
-    "<img src = 'stimuli/Face119_B.png'>" +
-    "<img src = 'stimuli/Face142_B.png'><br><br>" +
+    "<img src = 'stimuli_instructions/Face19_B.png'>" +
+    "<img src = 'stimuli_instructions/Face28_B.png'>" +
+    "<img src = 'stimuli_instructions/Face55_B.png'>" +
+    "<img src = 'stimuli_instructions/Face95_B.png'>" +
+    "<img src = 'stimuli_instructions/Face104_B.png'>" +
+    "<img src = 'stimuli_instructions/Face115_B.png'>" +
+    "<img src = 'stimuli_instructions/Face119_B.png'>" +
+    "<img src = 'stimuli_instructions/Face142_B.png'><br><br>" +
     "                              " +
     "<center><p class='instructions'> Faces of the <b><span style='color:#b5a21b'><b>YELLOW</b></span> group:</b></p>" +
-    "<img src = 'stimuli/Face10_J.png'>" +
-    "<img src = 'stimuli/Face16_J.png'>" +
-    "<img src = 'stimuli/Face17_J.png'>" +
-    "<img src = 'stimuli/Face45_J.png'>" +
-    "<img src = 'stimuli/Face85_J.png'>" +
-    "<img src = 'stimuli/Face103_J.png'>" +
-    "<img src = 'stimuli/Face116_J.png'>" +
-    "<img src = 'stimuli/Face132_J.png'>" +
+    "<img src = 'stimuli_instructions/Face10_J.png'>" +
+    "<img src = 'stimuli_instructions/Face16_J.png'>" +
+    "<img src = 'stimuli_instructions/Face17_J.png'>" +
+    "<img src = 'stimuli_instructions/Face45_J.png'>" +
+    "<img src = 'stimuli_instructions/Face85_J.png'>" +
+    "<img src = 'stimuli_instructions/Face103_J.png'>" +
+    "<img src = 'stimuli_instructions/Face116_J.png'>" +
+    "<img src = 'stimuli_instructions/Face132_J.png'>" +
     "<br>" +
     "<br>" +
     "<p class='instructions'><b>Please, take a few moments to look at the faces. </b><br><br>"+
@@ -495,24 +617,24 @@ var vaast_instructions_2_G1B = {
     "<h1 class ='custom-title'>Video Game task</h1>" +
     "<center><p class='instructions'>Two groups of faces will be displayed in this environment. <br></p>" +
     "<center><p class='instructions'> Faces of the <b><span style='color:#b5a21b'><b>YELLOW</b></span> group:</b></p>" +
-    "<center><img src = 'stimuli/Face19_J.png'>" +
-    "<img src = 'stimuli/Face28_J.png'>" +
-    "<img src = 'stimuli/Face55_J.png'>" +
-    "<img src = 'stimuli/Face95_J.png'>" +
-    "<img src = 'stimuli/Face104_J.png'>" +
-    "<img src = 'stimuli/Face115_J.png'>" +
-    "<img src = 'stimuli/Face119_J.png'>" +
-    "<img src = 'stimuli/Face142_J.png'><br><br>" +
+    "<center><img src = 'stimuli_instructions/Face19_J.png'>" +
+    "<img src = 'stimuli_instructions/Face28_J.png'>" +
+    "<img src = 'stimuli_instructions/Face55_J.png'>" +
+    "<img src = 'stimuli_instructions/Face95_J.png'>" +
+    "<img src = 'stimuli_instructions/Face104_J.png'>" +
+    "<img src = 'stimuli_instructions/Face115_J.png'>" +
+    "<img src = 'stimuli_instructions/Face119_J.png'>" +
+    "<img src = 'stimuli_instructions/Face142_J.png'><br><br>" +
     "                              " +
     "<center><p class='instructions'> Faces of the <b><span style='color:#2a57ea'><b>BLUE</b></span> group:</b></p>" +
-    "<img src = 'stimuli/Face10_B.png'>" +
-    "<img src = 'stimuli/Face16_B.png'>" +
-    "<img src = 'stimuli/Face17_B.png'>" +
-    "<img src = 'stimuli/Face45_B.png'>" +
-    "<img src = 'stimuli/Face85_B.png'>" +
-    "<img src = 'stimuli/Face103_B.png'>" +
-    "<img src = 'stimuli/Face116_B.png'>" +
-    "<img src = 'stimuli/Face132_B.png'></center>" +
+    "<img src = 'stimuli_instructions/Face10_B.png'>" +
+    "<img src = 'stimuli_instructions/Face16_B.png'>" +
+    "<img src = 'stimuli_instructions/Face17_B.png'>" +
+    "<img src = 'stimuli_instructions/Face45_B.png'>" +
+    "<img src = 'stimuli_instructions/Face85_B.png'>" +
+    "<img src = 'stimuli_instructions/Face103_B.png'>" +
+    "<img src = 'stimuli_instructions/Face116_B.png'>" +
+    "<img src = 'stimuli_instructions/Face132_B.png'></center>" +
     "<br>" +
     "<br>" +
     "<p class='instructions'><b>Please, take a few moments to look at the faces. </b><br><br>"+
@@ -549,13 +671,33 @@ var vaast_instructions_3 = {
   choices: [32]
 };
 
-var vaast_instructions_4 = {
+var vaast_instructions_4_placebo = {
   type: "html-keyboard-response",
   stimulus:
    "<h1 class ='custom-title'>Video Game task</h1>" +
     "<p class='instructions'>Before you begin, note that <b>we blurred the faces you previously saw and we removed the background color "+
     "to make the task more challenging.</b><br><br> "+ 
-    "However, you should know that: </p>" +
+    "However, keep in mind that: </p>" +
+    "<ul class='instructions'>" +
+    "<li><strong>Faces you will approach are always those of the " + group_to_approach + " group</strong></li>" +
+    "<br>" +
+    "<li><strong>Faces you will avoid are always those of the " + group_to_avoid + " group</strong></li>" +
+    "</ul>" +
+    "<p class='instructions'>Read carefully and make sure that you memorize the instructions above. </p>" +
+    "<br>" +
+    "<br>" +
+    "<p class = 'continue-instructions'>Press <strong>space</strong> to" +
+    " continue.</p>",
+  choices: [32]
+};
+
+var vaast_instructions_4_genuine = {
+  type: "html-keyboard-response",
+  stimulus:
+   "<h1 class ='custom-title'>Video Game task</h1>" +
+    "<p class='instructions'>Before you begin, note that <b>we blurred the faces you previously saw "+
+    "to make the task more challenging.</b><br><br> "+ 
+    "However, keep in mind that: </p>" +
     "<ul class='instructions'>" +
     "<li><strong>Faces you will approach are always those of the " + group_to_approach + " group</strong></li>" +
     "<br>" +
@@ -753,6 +895,8 @@ var vaast_fourth_step_training_1 = {
 }
 
 // VAAST training block -----------------------------------------------------------------
+
+// PLACEBO CONDITION
 var vaast_training = {
   timeline: [
     vaast_start,
@@ -776,88 +920,80 @@ var vaast_training = {
   }
 };
 
+// GENUINE CONDITION
+var vaast_training_block_G1Y = {
+  timeline: [
+    vaast_start,
+    vaast_fixation,
+    vaast_prime,
+    vaast_blank,
+    vaast_first_step_training_1,
+    vaast_second_step_training_1,
+    vaast_third_step_training_1,
+    vaast_fourth_step_training_1,
+    save_vaast_trial
+  ],
+  timeline_variables: vaast_stim_training_G1Y,
+  repetitions: 1, //6
+  randomize_order: true,
+  data: {
+    phase: "training",
+    prime: jsPsych.timelineVariable('prime'),
+    stimulus: jsPsych.timelineVariable('stimulus'),
+    movement: jsPsych.timelineVariable('movement'),
+  }
+};
+
+var vaast_training_block_G1B = {
+  timeline: [
+    vaast_start,
+    vaast_fixation,
+    vaast_prime,
+    vaast_blank,
+    vaast_first_step_training_1,
+    vaast_second_step_training_1,
+    vaast_third_step_training_1,
+    vaast_fourth_step_training_1,
+    save_vaast_trial
+  ],
+  timeline_variables: vaast_stim_training_G1B,
+  repetitions: 1, //6
+  randomize_order: true,
+  data: {
+    phase: "training",
+    prime: jsPsych.timelineVariable('prime'),
+    stimulus: jsPsych.timelineVariable('stimulus'),
+    movement: jsPsych.timelineVariable('movement'),
+  }
+};
+
 // Final questions -----------------------------------------------------------------------
 
-// Liking/positivity
-	var likertPreamble = '<p class = "justify"><br><br>Please indicate your degree of (dis)agreement with the statements listed below. ' +
-        'To do so, use the following scale: ' +
-        'from 1 = “Totally disagree” to 7 = “Totally agree”</p>';
-
-    var likertScale = ["1</br>Totally disagree", "2", "3", "4", "5", "6", "7</br>Totally agree"];
-
-
-    var likingGrpItems = [
-        'I like the ' + group_to_approach + ' group.',
-        'I like the ' + group_to_avoid + ' group.',
-        'Please answer 4 to this statement.',
-        'The ' + group_to_approach + ' group is positive.',
-        'The ' + group_to_avoid + ' group is positive.',
-    ];
-
-    var questionsLikingGrp = [];
-    likingGrpItems.map(function (item) { questionsLikingGrp.push({ prompt: '<i>' + item + '</i>', labels: likertScale, required: true }); });
-
-    var likingGrp = {
-        type: 'survey-likert',
-        preamble: likertPreamble,
-        questions: questionsLikingGrp,
-        post_trial_gap: 300,
-        on_load: function () {
-            $(".jspsych-content-wrapper").css("height", "700px");
-            $(".jspsych-content-wrapper").css("width", "700px");
-            $(".jspsych-content-wrapper").scrollTop(0);
-        },
-        on_finish: function (data) {
-            $(".jspsych-content-wrapper").css("height", "700px");
-            var parsed_response = JSON.parse(data.responses);
-            jsPsych.data.addProperties({
-                likingApproached1: parsed_response.Q0,
-                likingAvoided1: parsed_response.Q1,
-                AttentionCheck: parsed_response.Q2,
-                likingApproached2: parsed_response.Q3,
-                likingAvoided2: parsed_response.Q4,
-            });
-        },
-    };
-
-
-// Memory of instructions
-   var appGrpOptions = ['approach blue-background and avoid yellow-background faces&nbsp', 'approach yellow-background and avoid blue-background faces&nbsp', 'I do not remember&nbsp'];
-    var reportedAppGrp = {
-        type: 'survey-multi-choice',
-        questions: [{ prompt: "Please indicate which group you approached and avoided in the Video Game task: (if you do not remember, select the 'I do not remember' option)", options: appGrpOptions, required: true }],
-        button_label: "continue",
-        on_finish: function (data) {
-            jsPsych.data.addProperties({
-                reportedAppGrp: JSON.parse(data.responses).Q0,
-            });
-            console.log(data);
-        },
-    };
-
-// Believability of contingencies
-
-    var believeScale = ["0%</br>Not certain at all", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%</br>Absolutely certain"];
-    
+// memory & believability of contingencies
     var believeConting = {
-      type: 'survey-likert',
-      questions: [
-        {prompt: "How certain are you (from 0% = not certain at all to 100% = absolutely certain) that you approached the " + group_to_approach + " group and that you avoided the " + group_to_avoid + " group? <br><br>", name: 'believabilityconting', labels: believeScale},
-      ],
-      post_trial_gap: 300,
-        on_load: function () {
-            $(".jspsych-content-wrapper").css("height", "700px");
-            $(".jspsych-content-wrapper").css("width", "700px");
-            $(".jspsych-content-wrapper").scrollTop(0);
+        timeline: [{
+            type: 'survey-text',
+            preamble: "During this task, you approached faces belonging to one group and avoided faces belonging to the other group. <b><u>Based on what you experienced during the Video Game task</u></b>, you believe that <b><u>the faces you approached were...</u></b> (please answer this question by providing percentages (the <u>sum must be 100</u>))",
+            questions: [{ prompt: "% the yellow ones", rows: 1, columns: 10 },
+            { prompt: "% the blue ones", rows: 1, columns: 10 }],
+            button_label: "continue",
+        }],
+        loop_function: function (data) {
+            var res = data.values()[0].responses;
+            var res = JSON.parse(res).Q0;
+            if (res == "") {
+                alert("Please answer the question");
+                return true;
+            }
         },
         on_finish: function (data) {
-            $(".jspsych-content-wrapper").css("height", "700px");
-            var parsed_response = JSON.parse(data.responses);
             jsPsych.data.addProperties({
-                believabilityconting: parsed_response.Q0,
+                believeAppyellow: JSON.parse(data.responses).Q0,
+                believeAppblue: JSON.parse(data.responses).Q1,
             });
         },
     };
+
 
 //Gender
    var genderOptions = ['Male&nbsp', 'Female&nbsp', 'Other&nbsp'];
@@ -997,12 +1133,12 @@ timeline.push(
 timeline.push(save_id);
 
 switch(training_cond) {
-  case "cont_instr_vis_G1Y":
+  case "cont_placebo_G1Y":
     timeline.push(Gene_Instr,
                   vaast_instructions_1,
                   vaast_instructions_2_G1Y,
                   vaast_instructions_3,
-                  vaast_instructions_4,
+                  vaast_instructions_4_placebo,
                   vaast_training,
                   vaast_remember_instr_1,
                   vaast_training,
@@ -1010,8 +1146,6 @@ switch(training_cond) {
                   vaast_training,
                   vaast_instructions_5,
                   showing_cursor,
-                  //likingGrp,
-                  reportedAppGrp,
                   believeConting,
                   gender,
                   age,
@@ -1019,12 +1153,12 @@ switch(training_cond) {
                   Prolific_reported,
                   Comments);
     break;
-  case "cont_instr_vis_G1B":
+  case "cont_placebo_G1B":
     timeline.push(Gene_Instr,
                   vaast_instructions_1,
                   vaast_instructions_2_G1B,
                   vaast_instructions_3,
-                  vaast_instructions_4,
+                  vaast_instructions_4_placebo,
                   vaast_training,
                   vaast_remember_instr_1,
                   vaast_training,
@@ -1032,8 +1166,46 @@ switch(training_cond) {
                   vaast_training,
                   vaast_instructions_5,
                   showing_cursor,
-                  //likingGrp,
-                  reportedAppGrp,
+                  believeConting,
+                  gender,
+                  age,
+                  language,
+                  Prolific_reported,
+                  Comments);
+    break;
+  case "cont_genuine_G1Y":
+    timeline.push(Gene_Instr,
+                  vaast_instructions_1,
+                  vaast_instructions_2_G1Y,
+                  vaast_instructions_3,
+                  vaast_instructions_4_genuine,
+                  vaast_training_block_G1Y,
+                  vaast_remember_instr_1,
+                  vaast_training_block_G1Y,
+                  vaast_remember_instr_2,
+                  vaast_training_block_G1Y,
+                  vaast_instructions_5,
+                  showing_cursor,
+                  believeConting,
+                  gender,
+                  age,
+                  language,
+                  Prolific_reported,
+                  Comments);
+    break;
+  case "cont_genuine_G1B":
+    timeline.push(Gene_Instr,
+                  vaast_instructions_1,
+                  vaast_instructions_2_G1B,
+                  vaast_instructions_3,
+                  vaast_instructions_4_genuine,
+                  vaast_training_block_G1B,
+                  vaast_remember_instr_1,
+                  vaast_training_block_G1B,
+                  vaast_remember_instr_2,
+                  vaast_training_block_G1B,
+                  vaast_instructions_5,
+                  showing_cursor,
                   believeConting,
                   gender,
                   age,
