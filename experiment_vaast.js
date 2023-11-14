@@ -529,7 +529,7 @@ var save_vaast_trial = {
 
   var consent = {
     type:'external-html',
-    url: "https://marinerougier.github.io/Ugent_1/external_page_consent.html",
+    url: "https://marinerougier.github.io/Pilot_contingAA/external_page_consent.html",
     cont_btn: "start",
     check_fn: check_consent,
         on_load: function() {
