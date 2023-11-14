@@ -660,7 +660,7 @@ var vaast_instructions_3 = {
     "<br>" +
     "<p class='instructions'>The 'O' symbol that will be presented at the beginning of each trial indicates that you should press the START key (namely, the <b>D key</b>). </p>" +
     "<p class='instructions'>Then, you will see a fixation cross '+' followed by the 'approach' or the 'avoid' word. "+
-    "After the word, a face will appear. If you saw the word 'approach' your should press the MOVE FORWARD key (namely, the <b>E key</b>) to approach the face "+
+    "After the word, a face will appear. If you saw the word 'approach' you should press the MOVE FORWARD key (namely, the <b>E key</b>) to approach the face "+
     "and if you saw the word 'avoid' you should press the MOVE BACKWARD key (namely, the <b>C key</b>) to avoid the face. "+
     "<p class='instructions'>You will need to press the keys <b><u>three times</b></u> for a complete approach or avoidance movement. After the key presses, the face will disappear and you should " +
     "press again the START key (D key). " +
