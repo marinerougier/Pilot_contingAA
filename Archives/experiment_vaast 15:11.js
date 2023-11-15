@@ -1002,10 +1002,10 @@ var vaast_training_block_G1B = {
             }
         },
         on_finish: function (data) {
-                data.task = "believeConting";
-                var parsed_response  = JSON.parse(data.responses);
-                data.believeAppyellow_app      = parsed_response.Q0 ;
-                data.believeAppblue_app      = parsed_response.Q1
+            jsPsych.data.addProperties({
+                believeAppyellow_app: JSON.parse(data.responses).Q0,
+                believeAppblue_app: JSON.parse(data.responses).Q1,
+            });
         },
     };
 
@@ -1039,10 +1039,10 @@ var vaast_training_block_G1B = {
             }
         },
         on_finish: function (data) {
-                data.task = "believeConting";
-                var parsed_response  = JSON.parse(data.responses);
-                data.believeAppyellow_av      = parsed_response.Q0 ;
-                data.believeAppblue_av      = parsed_response.Q1
+            jsPsych.data.addProperties({
+                believeAppyellow_av: JSON.parse(data.responses).Q0,
+                believeAppblue_av: JSON.parse(data.responses).Q1,
+            });
         },
     };
 
@@ -1135,34 +1135,21 @@ var vaast_training_block_G1B = {
 
   // end insctruction ---------------------------------------------------------------------
 
-    /* DEBRIEF */
-  var debrief = [];
-  debrief += "<h1>Debriefing and survey validation.</h1>";
-  debrief += "<p class='justify'>Thank you for your participation!<br><br>";
-  debrief += "In some experiments, we cannot tell people everything about the experiment at the beginning because their responses would not be ";
-  debrief += "natural. For example, if we told people what the point of the experiment was ahead of time, then some people might do whatever ";
-  debrief += "it is they think we want them to do, just to be helpful. Other people might do the exact opposite of what they think we want "; 
-  debrief += "them to do, just to show us that we cannot figure them out. When people are trying to second-guess what the experiment is "; 
-  debrief += "really about, and they behave a certain way because of it, our results get messed up. That is because they are not behaving "; 
-  debrief += "like they naturally would in the real world. The whole point of this experiment is to find out how people would ";
-  debrief += "naturally behave.<br><br>";
-  debrief += "Now we would like to explain what we were trying to learn about with this study. First of all, you should know that you did not specifically approached/avoided the blue/yellow groups Video Game task. "; 
-  debrief += "In this experiment, we were more interested in the effect of the instructions you received. "; 
-  debrief += "The aim of this experiment was to test whether the first part of the experiment "; 
-  debrief += "(i.e., the instructions you received in the video game task) "; 
-  debrief += "influenced your responses to the second part. Specifically, we wanted to test to what extent you believed that you approached one group and avoided another group. ";
-  debrief += "We conducted this study because we would like to make sure that our procedure is credible enough for future research. </br></br>"; 
-  debrief += "We would like to emphasize that there are no correct responses in this study: We were looking at people’s natural responses. ";
-  debrief += "We hope you understand that we couldn't tell you all of this before because it would have ruined our study. ";
-  debrief += "Again, your responses will be anonymous and will be analyzed as part of a group of responses.</br></br>";
-  debrief += "We hope this explanation was clear. If you want additional information, if you have any questions, or if you would like ";
-  debrief += "to withdraw consent and have your data excluded, do not hesitate to contact us via Prolific Academic. If you are "; 
-  debrief += "interested, you can also ask for the results of this experiment—be aware, however, that this could take several weeks "; 
-  debrief += "to gather all the data we need and to analyze them. <br><br>";
-  debrief += "You can copy this code on Prolific: <b>1848E97F</b> ";
-  debrief += "or you can click on the following link to validate your participation:</p>";
-  debrief += "<a href='https://app.prolific.co/submissions/complete?cc=1848E97F' target='_blank'>click here</a><br><br>";
-
+  var ending = {
+    type: "html-keyboard-response",
+    stimulus:
+      "<p class='instructions'>Debriefing and survey validation.<p>" +
+      "<p class='instructions'>Thank you for your participation! " +
+      "First of all, you should know that you did not specifically approached/avoided the blue/yellow groups Video Game task. " +
+      "In this experiment, we were more interested in the effect of the instructions you received. " +
+      "The aim of this experiment was to test whether the first part of the experiment " +
+      "(i.e., the instructions you received in the video game task) " +
+      "influenced your responses to the second part. Specifically, we wanted to test to what extent you believed that you approached one group and avoided another group. " +
+      "We conducted this study because we would like to make sure that our procedure is credible enough for future research. </br></br>"+
+      "If you have any questions / remarks regarding this experiment, please contact me at:</br>marine.rougier@ugent.be</br></br>" +
+      "<p class = 'continue-instructions'>Press <strong>space</strong> to continue.</p>",
+    choices: [32]
+  };
 
   var ending_2 = {
     type: "html-keyboard-response",
@@ -1205,9 +1192,9 @@ switch(training_cond) {
                   vaast_instructions_4_placebo,
                   vaast_training,
                   vaast_remember_instr_1,
-                  //vaast_training,
+                  vaast_training,
                   vaast_remember_instr_2,
-                  //vaast_training,
+                  vaast_training,
                   vaast_instructions_5,
                   showing_cursor,
                   believeConting_app,
@@ -1226,9 +1213,9 @@ switch(training_cond) {
                   vaast_instructions_4_placebo,
                   vaast_training,
                   vaast_remember_instr_1,
-                  //vaast_training,
+                  vaast_training,
                   vaast_remember_instr_2,
-                  //vaast_training,
+                  vaast_training,
                   vaast_instructions_5,
                   showing_cursor,
                   believeConting_app,
@@ -1247,9 +1234,9 @@ switch(training_cond) {
                   vaast_instructions_4_genuine,
                   vaast_training_block_G1Y,
                   vaast_remember_instr_1,
-                  //vaast_training_block_G1Y,
+                  vaast_training_block_G1Y,
                   vaast_remember_instr_2,
-                  //vaast_training_block_G1Y,
+                  vaast_training_block_G1Y,
                   vaast_instructions_5,
                   showing_cursor,
                   believeConting_app,
@@ -1268,9 +1255,9 @@ switch(training_cond) {
                   vaast_instructions_4_genuine,
                   vaast_training_block_G1B,
                   vaast_remember_instr_1,
-                  //vaast_training_block_G1B,
+                  vaast_training_block_G1B,
                   vaast_remember_instr_2,
-                  //vaast_training_block_G1B,
+                  vaast_training_block_G1B,
                   vaast_instructions_5,
                   showing_cursor,
                   believeConting_app,
@@ -1286,6 +1273,9 @@ switch(training_cond) {
 
 timeline.push(fullscreen_trial_exit);
 
+// ending
+  timeline.push(ending,
+                ending_2);
 
 // Launch experiment --------------------------------------------------------------------
 // preloading ---------------------------------------------------------------------------
@@ -1313,32 +1303,9 @@ if (is_compatible) {
     on_interaction_data_update: function () {
       saving_browser_events(completion = false);
     },
-    on_finish: function(data) {
-    $("#jspsych-content").html("<img src='https://i.gifer.com/4V0b.gif'>");
-        
-        /* jsPsych: add data to every trial */
-            jsPsych.data.addProperties({
-                id: id,
-                prolificID: prolificID,
-                training_cond : training_cond, 
-                approached_grp : approached_grp,
-            });
-
-      var databelieveConting = data.filter({ task: 'believeConting' }).csv();
-
+    on_finish: function() {
           saving_browser_events(completion = true);
-        
-        /* Send data to Firebase */
-              database
-                .ref("Pilot_AA_contingencies_dataSR/" + id + "/")
-                .update({ databelieveConting })
-                .then(function () {
-                      console.log("Data sent!");
-                      $("#jspsych-content").html(debrief);
-                      //setTimeout(jsPsych.data.displayData, 5000);
-                });
-
-          //window.location.href = "https://app.prolific.ac/submissions/complete?cc=MEMHX5XQ";
+          window.location.href = "https://app.prolific.ac/submissions/complete?cc=MEMHX5XQ";
     }
   });
 }
