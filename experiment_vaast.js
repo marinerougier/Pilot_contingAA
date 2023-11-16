@@ -751,12 +751,6 @@ var vaast_instructions_5 = {
   type: "html-keyboard-response",
   stimulus:
     "<p class='instructions'><center>The Video Game task is now over.</center></b></p>" +
-    "Again, remember that: </p><br>" +
-    "<ul class='instructions'>" +
-    "<li><strong>Faces you approached were always those of the " + group_to_approach + " group</strong></li>" +
-    "<br>" +
-    "<li><strong>Faces you avoided were always those of the " + group_to_avoid + " group</strong></li>" +
-    "</ul>" +
     "<br>" +
     "<p class = 'continue-instructions'>Press <strong>space</strong> to" +
     " continue.</p>",
@@ -912,7 +906,7 @@ var vaast_training = {
     save_vaast_trial
   ],
   timeline_variables: vaast_stim_training,
-  repetitions: 1, //6
+  repetitions: 2,
   randomize_order: true,
   data: {
     phase: "training",
@@ -936,7 +930,7 @@ var vaast_training_block_G1Y = {
     save_vaast_trial
   ],
   timeline_variables: vaast_stim_training_G1Y,
-  repetitions: 1, //6
+  repetitions: 2,
   randomize_order: true,
   data: {
     phase: "training",
@@ -959,7 +953,7 @@ var vaast_training_block_G1B = {
     save_vaast_trial
   ],
   timeline_variables: vaast_stim_training_G1B,
-  repetitions: 1, //6
+  repetitions: 2,
   randomize_order: true,
   data: {
     phase: "training",
@@ -1159,9 +1153,9 @@ var vaast_training_block_G1B = {
   debrief += "to withdraw consent and have your data excluded, do not hesitate to contact us via Prolific Academic. If you are "; 
   debrief += "interested, you can also ask for the results of this experiment—be aware, however, that this could take several weeks "; 
   debrief += "to gather all the data we need and to analyze them. <br><br>";
-  debrief += "You can copy this code on Prolific: <b>1848E97F</b> ";
+  debrief += "You can copy this code on Prolific: <b>7B9D5899</b> ";
   debrief += "or you can click on the following link to validate your participation:</p>";
-  debrief += "<a href='https://app.prolific.co/submissions/complete?cc=1848E97F' target='_blank'>click here</a><br><br>";
+  debrief += "<a href='https://app.prolific.com/submissions/complete?cc=7B9D5899' target='_blank'>click here</a><br><br>";
 
 
   var ending_2 = {
@@ -1205,9 +1199,9 @@ switch(training_cond) {
                   vaast_instructions_4_placebo,
                   vaast_training,
                   vaast_remember_instr_1,
-                  //vaast_training,
+                  vaast_training,
                   vaast_remember_instr_2,
-                  //vaast_training,
+                  vaast_training,
                   vaast_instructions_5,
                   showing_cursor,
                   believeConting_app,
@@ -1226,9 +1220,9 @@ switch(training_cond) {
                   vaast_instructions_4_placebo,
                   vaast_training,
                   vaast_remember_instr_1,
-                  //vaast_training,
+                  vaast_training,
                   vaast_remember_instr_2,
-                  //vaast_training,
+                  vaast_training,
                   vaast_instructions_5,
                   showing_cursor,
                   believeConting_app,
@@ -1247,9 +1241,9 @@ switch(training_cond) {
                   vaast_instructions_4_genuine,
                   vaast_training_block_G1Y,
                   vaast_remember_instr_1,
-                  //vaast_training_block_G1Y,
+                  vaast_training_block_G1Y,
                   vaast_remember_instr_2,
-                  //vaast_training_block_G1Y,
+                  vaast_training_block_G1Y,
                   vaast_instructions_5,
                   showing_cursor,
                   believeConting_app,
@@ -1268,9 +1262,9 @@ switch(training_cond) {
                   vaast_instructions_4_genuine,
                   vaast_training_block_G1B,
                   vaast_remember_instr_1,
-                  //vaast_training_block_G1B,
+                  vaast_training_block_G1B,
                   vaast_remember_instr_2,
-                  //vaast_training_block_G1B,
+                  vaast_training_block_G1B,
                   vaast_instructions_5,
                   showing_cursor,
                   believeConting_app,
