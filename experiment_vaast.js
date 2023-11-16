@@ -991,7 +991,7 @@ var vaast_training_block_G1B = {
                 return true;
             }
             if (number0 + number1 != 100) {
-               alert("The sum must be 100!");
+               alert("The sum must be 100! Please only enter numbers");
                 return true;
             }
         },
@@ -1028,7 +1028,7 @@ var vaast_training_block_G1B = {
                 return true;
             }
             if (number0 + number1 != 100) {
-               alert("The sum must be 100!");
+               alert("The sum must be 100! Please only enter numbers");
                 return true;
             }
         },
