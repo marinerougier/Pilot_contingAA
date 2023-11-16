@@ -122,7 +122,7 @@ var browser_events_n = 1;
 
 // Instruction vs. instruction+sensory conditions
 var training_cond = jsPsych.data.getURLVariable("training_cond");
-//if(training_cond == null) {training_cond = jsPsych.randomization.sampleWithoutReplacement(["cont_placebo_G1Y"], 1)[0];}
+//if(training_cond == null) {training_cond = jsPsych.randomization.sampleWithoutReplacement(["cont_genuine_G1Y"], 1)[0];}
 if(training_cond == null) {training_cond = jsPsych.randomization.sampleWithoutReplacement(["cont_placebo_G1Y", "cont_placebo_G1B", "cont_genuine_G1Y", "cont_genuine_G1B"], 1)[0];}
 
 // for the AAT, randomization of which group is approached and which is avoided
